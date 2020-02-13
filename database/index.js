@@ -5,7 +5,7 @@ const connection = mysql.createConnection(mysqlConfig);
 
 //response to /getImages pulls url and product name
 const getImage = (prodId, callback) => {
-  connection.query(`select imgUrl, productName from ImageUrls where ProductId = '${prodId}';`, (err, data) => {
+  connection.query(`SELECT imgUrl, productName FROM ImageUrls WHERE ProductId = '${prodId}';`, (err, data) => {
     if (err) {
       throw err;
     } else {

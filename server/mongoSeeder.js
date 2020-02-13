@@ -11,6 +11,7 @@ const url = 'mongodb://localhost:27017';
 
 // Database Name
 const dbName = 'test'; //*** Change to db name ***
+const dataBlockSize = 10; //*** Size of Array that is pushed to db ***/
 
 const mongoSeeder = (quantity, collectionName, overwrite) => {
   // Use connect method to connect to the server
@@ -26,7 +27,8 @@ const mongoSeeder = (quantity, collectionName, overwrite) => {
         if (del) console.log('Collection deleted');
 
         // Create data instances
-        const products = [];
+        let products = [];
+        let counter = 1;
         for (let i = 1; i <= quantity; i++) {
           const productName = faker.commerce.productName();
           const newProduct = {
@@ -36,12 +38,17 @@ const mongoSeeder = (quantity, collectionName, overwrite) => {
           };
           products.push(newProduct);
           console.log(newProduct.productId, newProduct.productName, newProduct.image);
+          if (products.length === dataBlockSize || i === quantity) {
+            db.collection(collectionName).insertMany(products)
+              .then(products = [])
+              .then(console.log(`Partial seed completed ${counter} of ${Math.floor(quantity / dataBlockSize)}`))
+              .then(counter++);
+          }
         }
-        db.collection(collectionName).insertMany(products);
         console.log('Database seeded!');
         client.close();
       });
     }
   });
 };
-mongoSeeder(10, 'test2', true);
+mongoSeeder(100, 'test2', true);

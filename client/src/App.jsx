@@ -4,7 +4,6 @@ import axios from 'axios';
 //Components:
 import PopUpGallery from './components/PopUpGallery.jsx';
 import Image from './components/Image.jsx';
-import SeedMongoData from '../../server/mongoSeeder'
 
 class App extends React.Component {
   constructor(props) {
@@ -37,24 +36,24 @@ class App extends React.Component {
   }
 
   getRequest() {
-  //get request sends productId and sets state with response urls/product name
+  //Get request sends productId and sets state with response urls/product name
     axios.get('http://fecimages-env.pjpdatnnmu.us-east-1.elasticbeanstalk.com/getImages', {
       params:
     { productId: this.state.productId },
     })
       .then((response) => {
-      //clears product urls
+      //Clears product urls
         this.setState({
           productUrls: [],
         });
-        //maps over urls
+        //Maps over urls
         response.data.map((url) => {
           this.setState({
             productUrls: [...this.state.productUrls, url.imgUrl],
             productName: url.productName,
           });
         });
-        //sets current photo to first url
+        //Sets current photo to first url
         this.setState({
           currentPhoto: this.state.productUrls[0],
         });
