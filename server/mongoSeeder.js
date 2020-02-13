@@ -11,9 +11,10 @@ const url = 'mongodb://localhost:27017';
 
 // Database Name
 const dbName = 'test'; //*** Change to db name ***
-const dataBlockSize = 10; //*** Size of Array that is pushed to db ***/
+const collectionName = 'testProductData';
+const dataBlockSize = 1000; //*** Size of each Array that is pushed to db ***/
 
-const mongoSeeder = (quantity, collectionName, overwrite) => {
+const mongoSeeder = (quantity, collection, overwrite) => {
   // Use connect method to connect to the server
   MongoClient.connect(url, (err, client) => {
     assert.equal(null, err);
@@ -21,7 +22,7 @@ const mongoSeeder = (quantity, collectionName, overwrite) => {
     const db = client.db(dbName);
 
     if (overwrite) {
-      db.collection(collectionName).drop((err, del) => {
+      db.collection(collection).drop((err, del) => {
         // Error Handling
         if (err) throw err;
         if (del) console.log('Collection deleted');
@@ -39,7 +40,7 @@ const mongoSeeder = (quantity, collectionName, overwrite) => {
           products.push(newProduct);
           console.log(newProduct.productId, newProduct.productName, newProduct.image);
           if (products.length === dataBlockSize || i === quantity) {
-            db.collection(collectionName).insertMany(products)
+            db.collection(collection).insertMany(products)
               .then(products = [])
               .then(console.log(`Partial seed completed ${counter} of ${Math.floor(quantity / dataBlockSize)}`))
               .then(counter++);
@@ -51,4 +52,4 @@ const mongoSeeder = (quantity, collectionName, overwrite) => {
     }
   });
 };
-mongoSeeder(100, 'test2', true);
+mongoSeeder(10000, collectionName, true);
