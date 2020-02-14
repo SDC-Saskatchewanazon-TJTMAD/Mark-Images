@@ -50,7 +50,7 @@ const mongoSeeder = (collection, overwrite) => {
   MongoClient.connect(url, (err, client) => {
     assert.equal(null, err);
     db = client.db(dbName);
-    if (overwrite && db.collection(collection)) {
+    if (overwrite) {
       db.collection(collection).drop((error, del) => {
         if (error) throw error;
         if (del) console.log('Collection deleted');
@@ -59,8 +59,8 @@ const mongoSeeder = (collection, overwrite) => {
     } else {
       seed(collection);
     }
-    client.close();
+    //client.close();
   });
 };
 
-mongoSeeder(collectionName, true);
+mongoSeeder(collectionName, false);
