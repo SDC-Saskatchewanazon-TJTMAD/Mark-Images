@@ -12,9 +12,9 @@ const getImage = (prodId, callback) => {
     if (err) throw err;
     const dbo = db.db('test');
     const query = { productId: prodId };
-    dbo.collection('testProductData').find(query).toArray((err, result) => {
-      if (err) {
-        throw err;
+    dbo.collection('junk').find(query).toArray((error, result) => {
+      if (error) {
+        throw error;
       } else {
         callback(null, result);
         console.log(result);
