@@ -13,6 +13,7 @@ app.use(express.static(`${__dirname}/../client/dist`));
 
 //response to componentDidMount pulls image info from db based on product id
 app.get('/getImages', (req, res) => {
+  console.log('Hello');
   db.getImage(req.query.productId, (err, data) => {
     if (err) {
       console.error('server get error');

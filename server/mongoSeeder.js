@@ -2,7 +2,7 @@
 // un by typing command: node server/mongoSeeder.js FROM project folder
 
 const faker = require('faker');
-const { MongoClient } = require('mongodb');
+const MongoClient = require("mongodb").MongoClient;
 const assert = require('assert');
 const _ = require('lodash');
 
@@ -10,9 +10,9 @@ const _ = require('lodash');
 const url = 'mongodb://localhost:27017';
 
 // Database Name
-const dbName = 'test'; //*** Change to db name ***
-const collectionName = 'testProductData';
-const dataBlockSize = 1000; //*** Size of each Array that is pushed to db ***/
+const dbName = 'test'; //*** Change to Database name ***
+const collectionName = 'testProductData'; //*** Change to Collection name ***/
+const dataBlockSize = 10; //*** Size of each Array that is pushed to db ***/
 
 const mongoSeeder = (quantity, collection, overwrite) => {
   // Use connect method to connect to the server
@@ -21,7 +21,7 @@ const mongoSeeder = (quantity, collection, overwrite) => {
 
     const db = client.db(dbName);
 
-    if (overwrite) {
+    if (overwrite /*&& db.collection(collection)*/) {
       db.collection(collection).drop((err, del) => {
         // Error Handling
         if (err) throw err;
@@ -52,4 +52,4 @@ const mongoSeeder = (quantity, collection, overwrite) => {
     }
   });
 };
-mongoSeeder(10000, collectionName, true);
+mongoSeeder(100, collectionName, false);

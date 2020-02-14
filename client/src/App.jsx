@@ -37,7 +37,7 @@ class App extends React.Component {
 
   getRequest() {
   //Get request sends productId and sets state with response urls/product name
-    axios.get('http://fecimages-env.pjpdatnnmu.us-east-1.elasticbeanstalk.com/getImages', {
+    axios.get('/getImages', {
       params:
     { productId: this.state.productId },
     })
