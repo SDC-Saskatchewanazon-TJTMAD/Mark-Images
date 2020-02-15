@@ -22,7 +22,6 @@ let counter = 1;
 const seed = (collect) => {
   let products = [];
   for (let i = counter; i < counter + dataBlockSize; i++) {
-    console.log('hello');
     const productName = faker.commerce.productName();
     const newProduct = {
       productId: i,
@@ -48,7 +47,7 @@ const seed = (collect) => {
 // Delete database and run seed
 const mongoSeeder = (collection, overwrite) => {
   MongoClient.connect(url, (err, client) => {
-    assert.equal(null, err);
+    //assert.equal(null, err);
     db = client.db(dbName);
     if (overwrite) {
       db.collection(collection).drop((error, del) => {
@@ -63,4 +62,4 @@ const mongoSeeder = (collection, overwrite) => {
   });
 };
 
-mongoSeeder(collectionName, false);
+mongoSeeder(collectionName, true);
