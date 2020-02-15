@@ -4,14 +4,14 @@
 const faker = require('faker');
 const { MongoClient } = require('mongodb');
 const assert = require('assert');
-const _ = require('lodash');
+// const _ = require('lodash');
 
 // Connection URL
 const url = 'mongodb://localhost:27017';
 
 // Database & Collection Name
 const dbName = 'test'; //*** Change to Database name
-const collectionName = 'junk'; //*** Change to Collection name
+const collectionName = 'something'; //*** Change to Collection name
 const quantity = 1000; //*** Total number of data instances to add to db
 const dataBlockSize = 100; //*** Size of each Array that is pushed to db
 
@@ -19,7 +19,7 @@ let db;
 let counter = 1;
 
 // Create data instances
-const seed = (collect) => {
+const seed = (collect, client) => {
   let products = [];
   for (let i = counter; i < counter + dataBlockSize; i++) {
     const productName = faker.commerce.productName();
@@ -37,29 +37,35 @@ const seed = (collect) => {
     .then(() => {
       if (counter + dataBlockSize <= quantity) {
         counter += dataBlockSize;
-        seed(collect);
+        seed(collect, client);
       } else {
         console.log('Database seeded!');
+        client.close();
       }
-    });
+    })
+    .catch(console.log);
 };
 
 // Delete database and run seed
 const mongoSeeder = (collection, overwrite) => {
   MongoClient.connect(url, (err, client) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
     //assert.equal(null, err);
     db = client.db(dbName);
     if (overwrite) {
       db.collection(collection).drop((error, del) => {
         if (error) throw error;
         if (del) console.log('Collection deleted');
-        seed(collection);
+        seed(collection, client);
       });
     } else {
-      seed(collection);
+      seed(collection, client);
     }
     //client.close();
   });
 };
 
-mongoSeeder(collectionName, true);
+mongoSeeder(collectionName, false);
