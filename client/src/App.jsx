@@ -37,12 +37,13 @@ class App extends React.Component {
 
   getRequest() {
   //Get request sends productId and sets state with response urls/product name
-    axios.get('/getImages', {
+    axios.get('http://localhost:3000/getImages'/*, {
       params:
     { productId: this.state.productId },
-    })
+    }*/)
       .then((response) => {
       //Clears product urls
+        console.log(response); //***
         this.setState({
           productUrls: [],
         });
