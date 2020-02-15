@@ -1,21 +1,18 @@
 /* mongoSeeder.js */
-// Run by typing command: node server/mongoSeeder.js FROM project folder
+// Run by typing command: node server/mongoSeeder.js from project folder
 
 const faker = require('faker');
 const { MongoClient } = require('mongodb');
-const assert = require('assert');
-// const _ = require('lodash');
 
 // Connection URL
 const url = 'mongodb://localhost:27017';
 
-// Database & Collection Name
+// Database & Collection Names & Parameters
 const dbName = 'test'; //*** Change to Database name
-const collectionName = 'something'; //*** Change to Collection name
+const collectionName = 'junk'; //*** Change to Collection name
 const quantity = 1000; //*** Total number of data instances to add to db
 const dataBlockSize = 100; //*** Size of each Array that is pushed to db
 
-let db;
 let counter = 1;
 
 // Create data instances
@@ -31,7 +28,7 @@ const seed = (collect, client) => {
     products.push(newProduct);
     // console.log(newProduct.productId, newProduct.productName, newProduct.image);
   }
-  db.collection(collect).insertMany(products)
+  client.db(dbName).collection(collect).insertMany(products)
     .then(products = [])
     .then(console.log(`Partial seed completed ${Math.ceil(counter / dataBlockSize)} of ${Math.floor(quantity / dataBlockSize)}`))
     .then(() => {
@@ -46,17 +43,15 @@ const seed = (collect, client) => {
     .catch(console.log);
 };
 
-// Delete database and run seed
+// Delete database and/or run seed
 const mongoSeeder = (collection, overwrite) => {
-  MongoClient.connect(url, (err, client) => {
+  MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
     if (err) {
       console.log(err);
       return;
     }
-    //assert.equal(null, err);
-    db = client.db(dbName);
     if (overwrite) {
-      db.collection(collection).drop((error, del) => {
+      client.db(dbName).collection(collection).drop((error, del) => {
         if (error) throw error;
         if (del) console.log('Collection deleted');
         seed(collection, client);
@@ -64,7 +59,6 @@ const mongoSeeder = (collection, overwrite) => {
     } else {
       seed(collection, client);
     }
-    //client.close();
   });
 };
 
