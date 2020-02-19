@@ -115,7 +115,7 @@ class App extends React.Component {
         <h1>{this.state.productName}</h1>
         <button onClick={this.clickRandom}>Random Product</button>
         <Image
-          images={this.state.productUrls}
+          images={[this.state.currentPhoto]}
           id={this.state.productId}
           currentPhoto={this.state.currentPhoto}
           hoverChoose={this.hoverChoose}

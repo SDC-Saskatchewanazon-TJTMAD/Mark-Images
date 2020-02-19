@@ -1,0 +1,5 @@
+CREATE TABLE productData(
+   productId INTEGER PRIMARY KEY,
+   productName VARCHAR (50) NOT NULL,
+   image VARCHAR (50)
+);
