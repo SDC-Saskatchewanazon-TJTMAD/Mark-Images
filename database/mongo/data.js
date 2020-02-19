@@ -9,7 +9,7 @@ const DataSchema = new Schema(
     productName: String,
     image: String,
   },
-  { collection: 'junk' },
+  { collection: 'productData' },
 );
 
 // export the new Schema so we could modify it using Node.js
