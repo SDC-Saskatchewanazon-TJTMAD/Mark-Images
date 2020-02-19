@@ -1,4 +1,4 @@
-.tay-prodImg {
+.prodImg {
   font-family: "Amazon Ember", Arial, sans-serif;
   font-size: 13px;
   color: #525252;
@@ -6,17 +6,17 @@
   margin-left: 40px;
 }
 
-.tay-prodcontainer {
+.prodcontainer {
   display: flex;
   width: 70vw;
   height: 70vh;
 }
 
-.tay-hoverText {
+.hoverText {
   margin-left: 15vmax;
 }
 
-.tay-ProdName {
+.ProdName {
   font-weight: normal;
   padding-right: 40px;
   margin-top: 40px;
@@ -27,14 +27,14 @@
   z-index: 2;
 }
 
-.tay-thumbnailsDiv {
+.thumbnailsDiv {
   width: 50px;
   align-content: left;
   margin-right: 10px;
   margin-left: 5px;
 }
 
-.tay-thumbnail {
+.thumbnail {
   border-width: 1px;
   border-color: lightgrey;
   border-style: solid;
@@ -45,7 +45,7 @@
   object-fit: contain;
 }
 
-.tay-thumbnail:hover {
+.thumbnail:hover {
   border-width: 1px;
   border-color: #e77502b9;
   border-style: solid;
@@ -53,11 +53,11 @@
   box-shadow: 0px 0px 5px #e77502;
 }
 
-.tay-fullImage {
+.fullImage {
   display: flex;
 }
 
-.tay-prodImage {
+.prodImage {
   margin-top: 40px;
   display: flex;
   flex-flow: column nowrap;
@@ -69,14 +69,14 @@
 }
 
 /***** pop up modal *****/
-.tay-popupMain {
+.popupMain {
   /* display: flex; */
   position: absolute;
   /* align-content: 50%; */
   z-index: 123;
 }
 
-.tay-popup {
+.popup {
   display: flex;
   position: fixed;  
   width: 100%;  
@@ -89,7 +89,7 @@
   z-index: 122;
 }
 
-.tay-popupgallery {
+.popupgallery {
   position: absolute; 
   left: 5%;  
   right: 5%;  
@@ -100,7 +100,7 @@
   background: white;
 }
 
-.tay-popupthumbnailsDiv {
+.popupthumbnailsDiv {
   float: right;
   position: absolute;
   width: 50%;
@@ -112,7 +112,7 @@
   z-index: 1;
 }
 
-.tay-popupthumbnail {
+.popupthumbnail {
   left: 60%;
   float: right;
   position: relative;
@@ -127,21 +127,21 @@
   object-fit: contain;
 }
 
-.tay-popupthumbnail:hover {
+.popupthumbnail:hover {
   border-width: 2px;
   border-color: navy;
   border-style: solid;
   border-radius: 2px;
 }
 
-/* .tay-popupselectedthumbnail {
+/* .popupselectedthumbnail {
   border-color:#e77502b9;
   border-style: solid;
   border-radius: 3px;
   border-width: 1px;
 } */
 
-.tay-popupprodimage {
+.popupprodimage {
   margin-top: 50px;
   margin-left: 15%;
   display: flex;
@@ -153,7 +153,7 @@
   object-fit: contain;
 }
 
-.tay-close {
+.close {
   border: none;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   position:relative;

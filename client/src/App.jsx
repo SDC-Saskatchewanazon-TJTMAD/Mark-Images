@@ -22,6 +22,7 @@ class App extends React.Component {
     this.fullHover = this.fullHover.bind(this);
     this.togglePopUp = this.togglePopUp.bind(this);
     this.clickChoose = this.clickChoose.bind(this);
+    this.clickRandom = this.clickRandom.bind(this);
   }
 
   componentDidMount() {
@@ -37,29 +38,30 @@ class App extends React.Component {
 
   getRequest() {
   //Get request sends productId and sets state with response urls/product name
-    axios.get('http://localhost:3000/getImages'/*, {
+    axios.get('http://localhost:3000/getImages', {
       params:
     { productId: this.state.productId },
-    }*/)
+    })
       .then((response) => {
       //Clears product urls
-        console.log(response); //***
-        this.setState({
-          productUrls: [],
-        });
-        //Maps over urls
-        response.data.map((url) => {
-          this.setState({
-            productUrls: [...this.state.productUrls, url.imgUrl],
-            productName: url.productName,
-          });
-        });
+        // this.setState({
+        //   productUrls: [],
+        // });
+        // //Maps over urls
+        // response.data.map((url) => {
+        //   this.setState({
+        //     productUrls: [...this.state.productUrls, url.imgUrl],
+        //     productName: url.productName,
+        //   });
+        // });
+
         //Sets current photo to first url
         this.setState({
-          currentPhoto: this.state.productUrls[0],
+          currentPhoto: response.data.data[0].image,
+          productName: response.data.data[0].productName,
         });
       })
-      .catch((err) => { console.error('no soup for you'); });
+      .catch(() => { console.error('no soup for you'); });
   }
 
   hoverChoose(event) {
@@ -77,6 +79,14 @@ class App extends React.Component {
     this.setState({
       currentPhoto: event.target.src,
     });
+  }
+
+  clickRandom(event) {
+    //Click on thumbnail to choose current image in popup
+    event.preventDefault();
+    this.setState({
+      productId: Math.ceil(Math.random() * 1000),
+    }, () => { console.log(this.state.productId); this.getRequest(); });
   }
 
   fullHover(event) {
@@ -101,7 +111,9 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="tay-prodImg">
+      <div className="prodImg">
+        <h1>{this.state.productName}</h1>
+        <button onClick={this.clickRandom}>Random Product</button>
         <Image
           images={this.state.productUrls}
           id={this.state.productId}

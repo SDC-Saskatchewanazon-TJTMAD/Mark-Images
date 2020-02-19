@@ -1,7 +1,7 @@
 import React from 'react';
 
 const FullImage = ({ id, src, fullHover, clickIt, className }) => (
-  <div className="tay-prodcontainer">
+  <div className="prodcontainer">
     <img
       id={id}
       className={className}

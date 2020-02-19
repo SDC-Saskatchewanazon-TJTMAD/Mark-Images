@@ -1,5 +1,5 @@
 /* mongoSeeder.js */
-// Run by typing command: node server/mongoSeeder.js from project folder
+// Run by typing command: node database/mongo/mongoSeeder.js from project folder
 
 const faker = require('faker');
 const { MongoClient } = require('mongodb');
@@ -62,4 +62,4 @@ const mongoSeeder = (collection, overwrite) => {
   });
 };
 
-mongoSeeder(collectionName, false);
+mongoSeeder(collectionName, true);
