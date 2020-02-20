@@ -17,12 +17,12 @@ client.connect();
 const getImage = (prodId, callback) => {
   console.log('Postgres Activated');
   console.log(prodId);
-  client.query(`SELECT * FROM junk WHERE productid = 3` /*"${prodId}";`*/, (err, data) => {
-    console.log(data.rows);
+  client.query(`SELECT * FROM junk WHERE productid = '${prodId}';`, (err, data) => {
+    console.log(data.rows[0]);
     if (err) {
       throw err;
     } else {
-      callback(null, data);
+      callback(null, data.rows[0]);
     }
     //client.end();
   });

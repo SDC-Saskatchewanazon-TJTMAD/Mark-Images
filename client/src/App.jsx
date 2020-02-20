@@ -85,7 +85,7 @@ class App extends React.Component {
     //Click on thumbnail to choose current image in popup
     event.preventDefault();
     this.setState({
-      productId: Math.ceil(Math.random() * 10000000),
+      productId: Math.ceil(Math.random() * 1000),
     }, () => { console.log(this.state.productId); this.getRequest(); });
   }
 

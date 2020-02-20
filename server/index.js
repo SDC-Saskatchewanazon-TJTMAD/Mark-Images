@@ -23,7 +23,7 @@ app.use(express.static(`${__dirname}/../client/dist`));
 // db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // app.get('/getImages', (req, res) => {
-//   console.log('Getting Image');
+//   console.log('Getting Mongo Image');
 //   Data.find({ _id: req.query.productId }, (err, data) => {
 //     if (err) return res.json({ success: false, error: err });
 //     return res.json({ success: true, data: data });
@@ -34,6 +34,7 @@ app.use(express.static(`${__dirname}/../client/dist`));
 const datab = require('../database/postgres/index.js');
 
 app.get('/getImages', (req, res) => {
+  console.log('Getting Postgres Image');
   datab.getImage(req.query.productId, (err, data) => {
     if (err) {
       console.error('server get error');
