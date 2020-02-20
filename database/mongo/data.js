@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 // this will be our data base's data structure
 const DataSchema = new Schema(
   {
-    productId: Number,
+    _id: Number,
     productName: String,
     image: String,
   },

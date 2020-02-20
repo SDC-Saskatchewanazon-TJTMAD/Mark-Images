@@ -85,7 +85,7 @@ class App extends React.Component {
     //Click on thumbnail to choose current image in popup
     event.preventDefault();
     this.setState({
-      productId: Math.ceil(Math.random() * 1000),
+      productId: Math.ceil(Math.random() * 10000000),
     }, () => { console.log(this.state.productId); this.getRequest(); });
   }
 
@@ -113,7 +113,7 @@ class App extends React.Component {
     return (
       <div className="prodImg">
         <h1>{this.state.productName}</h1>
-        <button onClick={this.clickRandom}>Random Product</button>
+        <button type="button" onClick={this.clickRandom}>Random Product</button>
         <Image
           images={[this.state.currentPhoto]}
           id={this.state.productId}

@@ -1,7 +1,6 @@
 import React from 'react';
 
-const Thumbnail = ({id, image, hoverChoose, i, className, clickChoose }) => {
-
+const Thumbnail = ({ id, image, hoverChoose, i, className, clickChoose }) => {
   return (
     <>
       <img
@@ -16,5 +15,4 @@ const Thumbnail = ({id, image, hoverChoose, i, className, clickChoose }) => {
     </>
   );
 };
-
 export default Thumbnail;

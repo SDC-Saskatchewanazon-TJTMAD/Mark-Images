@@ -9,9 +9,9 @@ const url = 'mongodb://localhost:27017';
 
 // Database & Collection Names & Parameters
 const dbName = 'test'; //*** Change to Database name
-const collectionName = 'junk'; //*** Change to Collection name
-const quantity = 1000; //*** Total number of data instances to add to db
-const dataBlockSize = 100; //*** Size of each Array that is pushed to db
+const collectionName = 'productData'; //*** Change to Collection name
+const quantity = 10000000; //*** Total number of data instances to add to db
+const dataBlockSize = 1000; //*** Size of each Array that is pushed to db
 
 let counter = 1;
 
@@ -21,7 +21,7 @@ const seed = (collect, client) => {
   for (let i = counter; i < counter + dataBlockSize; i++) {
     const productName = faker.commerce.productName();
     const newProduct = {
-      productId: i,
+      _id: i,
       productName,
       image: 'https://picsum.photos/640/480',
     };
